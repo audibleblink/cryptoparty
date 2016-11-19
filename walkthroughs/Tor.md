@@ -5,7 +5,7 @@
 
 ## How they spy on you
 
-## How you protect yoursef
+## How you protect yourself
 
 ### Using Tor
 
