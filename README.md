@@ -1,0 +1,37 @@
+## Tools
+
+### Account Security
+  - password managers
+
+### E-Mail
+  - Thundrebird + Enigmail
+  - keybase.io
+  - Proton Mail
+
+### Mobile Messaging
+  - Signal
+
+### Researching
+  - Tor
+  - DuckDuckGo
+
+### Files
+  - Metadata stripping
+  - SpiderOak
+  - Onion Share
+  - GPG w/password
+
+## Delivery methods
+  - Small / Digestable / Encouraging
+  - Things you want to do -> How it's vulnerable -> How to protect yourself
+
+## Walkthroughs
+
+  1. Setting Up a GPG Key
+  2. Using someone else's key to encrypt a message
+  3. Unencrypting a message someone sent you
+  4. Configuring Thunderbird
+  5. Using keybase.io
+  6. Installing Tor
+  7. Using DuckDuckGo
+  8. Protecting again MITM
