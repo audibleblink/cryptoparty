@@ -6,7 +6,7 @@
 ### E-Mail
   - Thundrebird + Enigmail
   - keybase.io
-  - Proton Mail
+  - [Proton Mail](./walkthroughs/Proton Mail.md)
 
 ### Mobile Messaging
   - Signal
