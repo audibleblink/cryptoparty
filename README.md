@@ -23,7 +23,7 @@
 
 ## Delivery methods
   - Small / Digestable / Encouraging
-  - Things you want to do -> How it's vulnerable -> How to protect yourself
+  - Things you want to do -&lt; How it's vulnerable -&lt; How to protect yourself
 
 ## Walkthroughs
 
