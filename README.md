@@ -4,7 +4,7 @@
   - password managers
 
 ### E-Mail
-  - Thundrebird + Enigmail
+  - Thunderbird + Enigmail
   - keybase.io
   - [Proton Mail](./walkthroughs/Proton Mail.md)
 
