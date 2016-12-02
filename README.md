@@ -4,9 +4,9 @@
   - password managers
 
 ### E-Mail
-  - Thundrebird + Enigmail
+  - Thunderbird + Enigmail
   - keybase.io
-  - Proton Mail
+  - [Proton Mail](./walkthroughs/Proton Mail.md)
 
 ### Mobile Messaging
   - Signal
@@ -23,7 +23,7 @@
 
 ## Delivery methods
   - Small / Digestable / Encouraging
-  - Things you want to do -> How it's vulnerable -> How to protect yourself
+  - Things you want to do -&lt; How it's vulnerable -&lt; How to protect yourself
 
 ## Walkthroughs
 
