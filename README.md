@@ -1,7 +1,7 @@
 ## Tools
 
 ### Account Security
-  - password managers
+  - [Password Managers](./walkthroughs/password_managers.md)
 
 ### E-Mail
   - Thunderbird + Enigmail
