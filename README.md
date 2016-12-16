@@ -9,7 +9,7 @@
   - [Proton Mail](./walkthroughs/Proton Mail.md)
 
 ### Mobile Messaging
-  - Signal
+  - [Signal](./walkthroughs/Signal.md)
 
 ### Researching
   - Tor
