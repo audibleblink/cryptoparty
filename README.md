@@ -13,7 +13,7 @@
 
 ### Researching
   - [Tor](./walkthroughs/tor.md)
-  - DuckDuckGo
+  - [DuckDuckGo](./walkthroughs/DuckDuckGo.md)
 
 ### Files
   - Metadata stripping
