@@ -12,7 +12,7 @@
   - Signal
 
 ### Researching
-  - Tor
+  - [Tor](./walkthroughs/tor.md)
   - DuckDuckGo
 
 ### Files
