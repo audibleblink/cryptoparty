@@ -27,7 +27,7 @@
 
 ## Walkthroughs
 
-  1. Setting Up a GPG Key
+  1. [Setting Up a GPG Key](./walkthroughs/gpg_key_setup.md)
   2. Using someone else's key to encrypt a message
   3. Unencrypting a message someone sent you
   4. Configuring Thunderbird
