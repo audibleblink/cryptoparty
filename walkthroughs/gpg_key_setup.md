@@ -228,6 +228,21 @@ Let's make the default GPG directory for Tails the one that has your secret key.
 
 You're done. Take this Tails USB key and hide it away! Take the USB key with your subkeys and start encrypting and decryting with it. Publish that key far and wide!
 
+## Reboot into your Standard Operating System
+
+### Linux
+
+* Power off Tails and put that key in a vault
+* Power on your typical operating system (in my case, Ubuntu)
+* Copy the contents of the sub-key USB key into ~/.gnupg
+* `cd $HOME/.gnupg`
+* `gpg -K` (`gpg` performs an upgrade)
+* See the sub-key output (`sec#`)
+
+### Windows
+
+
+
 [Tails Installation Assistant]: https://tails.boum.org/install/index.en.html
 [TPV]: https://tails.boum.org/doc/first_steps/persistence/configure/index.en.html
 [Tails]: https://tails.boum.org
