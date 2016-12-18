@@ -128,14 +128,14 @@ In the terminal type:
 3. For keysize choose 4096. This will make your `master` key the most complex and hard to steal possible
 4. Set an expiration of `1y` (one year). Keys should have a built-in death date. If your master key is stolen or lost this is the only way to tell the public that people signing as you should stop being trusted. It's much like the expiration date an a credit card. Expiration dates, also like credit cards, can be renewed (covered elsewhere)
 5. Accept these changes
-6. Provide your real real name
-7. Provide a valid email address
+6. Provide your real real name (here "Tutorial")
+7. Provide a valid email address (here `tutorial@example.com`)
 8. Leave comment blank
 9. Select **O**kay
 10. **SELECT A VERY STRONG PASSWORD** A weak password is the same as leaving your key under the mat. Make this very difficult to guess and / or store it in a password manager.
 11. Re-enter it to confirm
 
-Here we see "Tutorial" has an identity of `7EC9E024`.
+Here we see "Tutorial" has an identity of `7EC9E024`. Henceforth in this guide use your name and key ID instead of these two bits of data.
 
 We also must prepare for the worst. Let's suppose somehow your master key becomes compromised. You need an "anti-key" that will cancel the master key. This is called a "revocation certificate." We create it right now in the most optimistic moment and we save it in a safe place, on our Persistent volume.
 
@@ -151,11 +151,59 @@ This is a rather convoluted process but it comes out like this.
 
 1. You have a private key in a keyring
 2. Generate a new sub-key on that keyring
-3. Create a copy of the key + new sub-key keyring
-4. Remove the private key from one of the copies (this will be your daily use ring)
-5. Remove the sub-key from one of the keyring copies (this will be your master ring) that will live in the vault with your Tails distribution
+3. Move this keyring to a safe place
+4. Copy the keyring, sans the master private key to a daily use place
 
 We follow the path defined in the [Debian Subkeys Guide](https://wiki.debian.org/Subkeys).
+
+1. Start in the terminal
+1. `cd`
+1. `umask 077; tar -cf $HOME/Persistent/gnupg-backup.tar -C $HOME .gnupg`
+1.  Congratulations, on your Persistent drive you have a backup of the keys `gpg` created in case something bad happens
+1.  `gpg --edit-key 7EC9E024`: Remember, this is "Tutorial's" identifier. This will open the `gpg` dialog
+1.  `addkey`
+1.  Provide your secret key
+1.  Choose "RSA (sign only)"
+1.  Enter 4096
+1.  Set expiry for "1y"
+1.  **y** for really create
+1.  `list`
+
+_Pic here_
+
+As you can see, the new key `963ABC84` now exists and it has `usage: S` (subkey) and it has "ultimate" trust to the original key of "Tutorial." That is, `963ABC84` knows its spawned from `7EC9E024`, the master private key. `963ABC84` will go into the world as a "representative of" the master private key but is only just that: a representative, a symbol of the authority of a thing somewhere else – rather like a diplomat. 
+
+However, we've only created a _signing_ subkey. If we want to encrypt, we also want to create an encryption subkey. Follow the same steps as above but specify "RSA (encrypt only)."
+
+At the `gpg>` prompt type `list` and you should see 4 keys:
+
+* Your _master_ private key
+* Your public encryption key
+* Your first sub-key (for signing)
+* Your first sub-key (for encrypting)
+
+With this we finish step 2.
+
+In step 3 we need to store this full keyring somewhere. This is simple:
+
+`cp -r ~/.gnupg ~/Persistent/gnupg-master-Tutorial-7EC9E024`
+
+I recommend this long informative name for easy recall. Hopefully you won't see this information often! That was it!
+
+In our final step we need to remove the master key from the keyring.
+
+Take a look at the key database with `gpg --list-keys`
+
+The top key is our _master_ key and it needs to get out for the daily-use keyring.
+
+* `gpg --output ~/Persistent/secret-subkeys --export-secret-subkeys 7EC9E024`
+* `gpg --delete-secret-keys 7EC9E024` with **y** to confirm and **y** again. I know, it's scary!
+* `gpg --import ~/Persistent/secret-subkeys`
+* `rm ~/Persistent/secret-subkeys`
+
+Now list your secret keys with `gpg -K`. You will see that first key `7EC9E024` now says `sec#` which means this keyring no longer has the secret key on it. By way of comparison try `gpg --homedir ~/Persistent/gnupg-master-Tutorial-7EC9E024 -K` and you'll see that the "master" directory still has the full details! The first line is `sec` versus `sec#`.
+
+
 
 
 
