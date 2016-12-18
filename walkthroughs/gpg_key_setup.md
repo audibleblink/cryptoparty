@@ -8,7 +8,7 @@ This is one of the most important steps toward having secure communications. Whi
 
 * [Tails][] Live USB Stick: [Tails][] (to create one anew requires **2 USB sticks**). This Tails installation will be going into a "vault" (keep at home, lock in a safe, keep in a safe-deposit box, etc.). After the following process, your USB key should be taken out of daily usage.
 * Daily-use USB stick: Blank. This will be used to store _*your most important data*_. After we finish this process you'll put it in a vault, safe, safety-deposit box, post an armed guard, etc. It's going to hold something very important
-* **THREE** very straong passwords
+* **THREE** very strong passwords
 
 ## Metaphor
 
