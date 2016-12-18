@@ -8,7 +8,7 @@ This is one of the most important steps toward having secure communications. Whi
 
 * [Tails] Live USB Stick: [Tails][] (to create one anew requires **2 USB sticks**). This Tails installation will be going into a "vault" (keep at home, lock in a safe, keep in a safe-deposit box, etc.). After the following process, your USB key should be taken out of daily usage.
 * Daily-use USB stick: Blank. This will be used to store _*your most important data*_. After we finish this process you'll put it in a vault, safe, safety-deposit box, post an armed guard, etc. It's going to hold something very important
-* **TWO** very straong passwords
+* **THREE** very straong passwords
 
 ## Metaphor
 
@@ -203,14 +203,30 @@ The top key is our _master_ key and it needs to get out for the daily-use keyrin
 
 Now list your secret keys with `gpg -K`. You will see that first key `7EC9E024` now says `sec#` which means this keyring no longer has the secret key on it. By way of comparison try `gpg --homedir ~/Persistent/gnupg-master-Tutorial-7EC9E024 -K` and you'll see that the "master" directory still has the full details! The first line is `sec` versus `sec#`.
 
+Lastly, the password on this "de-mastered" keyring is still the same as your original strong password. Apply your third (and final) password to this key with: `gpg --edit-key 7EC9E024 passwd`
 
+At this point, on your Tails installation you have your master credentials. We now need to get your daily-use credentials on your second USB stick. Insert this USB stick into the computer. For Unix people: "We need to mount the new USB disk and copy the subkey information onto the drive."
 
+1. Run `lsblk` this means :List Block Devices, aka Disks
+2. On my system `sda` has a tree that has a bunch of Tails partitions. `sda` means device `a`. Its partitions are `sda1`, `sda2`, etc.
+3. `sdb` looks similar, but seems to be the right size of the USB stick I injected. I'm going to use the first partition of this device thus `/dev/` + device `sdb` + partition `1` thus my "device name" is `/dev/sdb1`.
+4. I need a "mount point" a directory on the disk that will tunnel data back to /dev/sdb1.
+5. I enter the command: `sudo mount /dev/sdb1 /mnt -o umask=000`
+6. This means any user can write to this "directory."
+7. Copy the subkey goodies over: cp -r ~/.gnupg /mnt/gnupg`
+8. `cd /mnt/gnupg`
+9. `gpg --homedir . -K`: The output should show the subkey with master key removed (`sec#`).
+10. `cd && sudo umount /mnt`
 
+## Cleanup
 
+Let's make the default GPG directory for Tails the one that has your secret key.
 
+1. `rm ~/.gnupg/*`
+2. `cp ~/Persistent/gnupg-master-Tutorial-7EC9E024/* ~/.gnupg`
+3. `gpg -K` should show that your private key is the real deal (i.e. no `sec#` but rather `sec`)
 
-
-
+You're done. Take this Tails USB key and hide it away! Take the USB key with your subkeys and start encrypting and decryting with it. Publish that key far and wide!
 
 [Tails Installation Assistant]: https://tails.boum.org/install/index.en.html
 [TPV]: https://tails.boum.org/doc/first_steps/persistence/configure/index.en.html
