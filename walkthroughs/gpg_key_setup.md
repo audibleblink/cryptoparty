@@ -216,6 +216,8 @@ At this point, on your Tails installation you have your master credentials. We n
 7. Copy the subkey goodies over: cp -r ~/.gnupg /mnt/gnupg`
 8. `cd /mnt/gnupg`
 9. `gpg --homedir . -K`: The output should show the subkey with master key removed (`sec#`).
+9. `gpg --export -a  7EC9E024 > public.key`: write out a copy of your public key, other tools that sign as you will need this
+9. `gpg --export-secret-key -a  7EC9E024 > private.key`: write out your public key, you'll want to share this with the world so people can contact you securely!
 10. `cd && sudo umount /mnt`
 
 ## Cleanup
@@ -232,15 +234,26 @@ You're done. Take this Tails USB key and hide it away! Take the USB key with you
 
 ### Linux
 
-* Power off Tails and put that key in a vault
+* Power off Tails and put that USB key in a vault
 * Power on your typical operating system (in my case, Ubuntu)
-* Copy the contents of the sub-key USB key into ~/.gnupg
+* Copy the contents of the sub-key USB key (in the `gnupg` directory) into ~/.gnupg
 * `cd $HOME/.gnupg`
 * `gpg -K` (`gpg` performs an upgrade)
 * See the sub-key output (`sec#`)
+* All set!
 
 ### Windows
 
+* Power off Tails and put that USB key in a vault
+* Power on your typical operating system
+* Install [Gpg4Win][]
+* Open "Kleopatra" – Installed as part of the [Gpg4Win][] install
+* Click "Import Certificates"
+* Browse to your USB key
+* Find your `gnupg` directory
+* 
+
+[Gpg4Win]: https://www.gpg4win.org/
 
 
 [Tails Installation Assistant]: https://tails.boum.org/install/index.en.html
