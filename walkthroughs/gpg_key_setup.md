@@ -236,10 +236,15 @@ You're done. Take this Tails USB key and hide it away! Take the USB key with you
 
 * Power off Tails and put that USB key in a vault
 * Power on your typical operating system (in my case, Ubuntu)
-* Copy the contents of the sub-key USB key (in the `gnupg` directory) into ~/.gnupg
-* `cd $HOME/.gnupg`
-* `gpg -K` (`gpg` performs an upgrade)
-* See the sub-key output (`sec#`)
+* If you have no pre-existing ~/.gnupg directory
+  * Copy the contents of the sub-key USB key (in the `gnupg` directory) into ~/.gnupg
+  * `cd $HOME/.gnupg`
+  * `gpg -K` (`gpg` performs an upgrade)
+  * See the sub-key output (`sec#`)
+* If you have a pre-existing ~/.gnupg directory, you can import the key files you generated:
+  * Change to the USB key directory in the terminal
+  * `gpg --import public_key.gpg`
+  * `gpg --import private_key.gpg`
 * All set!
 
 ### Windows
@@ -251,7 +256,13 @@ You're done. Take this Tails USB key and hide it away! Take the USB key with you
 * Click "Import Certificates"
 * Browse to your USB key
 * Find your `gnupg` directory
-* 
+* Select your private key file
+* Repeat the above for your public key file
+* All set!
+
+### OSX
+
+OSX operates as Linux.
 
 [Gpg4Win]: https://www.gpg4win.org/
 
