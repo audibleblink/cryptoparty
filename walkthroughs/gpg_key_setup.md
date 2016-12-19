@@ -12,17 +12,17 @@ This is one of the most important steps toward having secure communications. Whi
 
 ## Metaphor
 
-Before we get started, walkthroughs tend to follow a format where someone who doesn't understand what's going on is told to type impenetrable commands by someone who already knows what's going on. I'd like to prevent a metaphor here so that, even if you don't understand the exact commands, you can map the steps into a game plan. It's a little hard to associate cryptography with physical security systems (locks, bolts, keys, etc.) but we'll do our best.
+Before we get started, walkthroughs tend to follow a format where someone who doesn't understand what's going on is told to type impenetrable commands by someone who already knows what's going on. I'd like to present a metaphor here so that, even if you don't understand the exact commands, you can map the steps into a game plan. It's a little hard to associate cryptography with physical security systems (locks, bolts, keys, etc.) but we'll do our best.
 
-We know of a locksmith called `gpg`. In the right workshop, `gpg` can craft for us some special keys that guard our house and can let only our friends in. `gpg`'s keys can also be used to say we are who we say we are. `gpg`'s keys can also be used to help us build a reputation as a trustworhy person by having other people's keys (vouched for by their _own_ keys) vouch _for us_. He's truly an amazing locksmith.
+We know of a locksmith called `gpg`. In the right workshop, `gpg` can craft for us some special keys that guard our house and the locks that go in the door. `gpg`'s keys can also be used to say we are who we say we are. `gpg`'s keys can also be used to help us build a reputation as a trustworthy person by having other people's keys (vouched for by their _own_ keys) vouch _for us_. He's truly an amazing locksmith. Lastly GPG can provide us some magic ink that allows anyone in the world to write to us but which we _alone_ can read while holding his special key. Awesome! Right?
 
-But here's the thing, he doesn't have his own workshop. Because of his reputation, many individuals would love to get a camera into `gpg`'s shop. Or they'd like to install some tracing paper under his key-making machine so that when his key grinder runs they could also get a copy of what his machine made. Accordingly, **the first thing we have to do is give `gpg` a secure workshop: that's "Tails."**
+But here's the thing, he doesn't have his own workshop. And because of his reputation, many individuals would love to get a camera into `gpg`'s shop. Or they'd like to install some tracing paper under his key-making machine so that when his key grinder runs they could also get a copy of what his machine made. Accordingly, **the first thing we have to do is give `gpg` a secure workshop: that's "Tails."**
 
-Once we have our secure workspace, `gpg` will build us a custom lock for our house and give us a very-special custom key that matches: key **the private key**. This key opens your house so it **has to be guarded very carefully**.
+Once he has a secure workspace, `gpg` will build us a custom lock for our house and give us a very-special custom key that matches: **the private key**. This key opens your house so it **has to be guarded very carefully**.
 
-`gpg` has also discovered a way to create a key that can only be unlocked by your **private** key. This associated key is known as your **public** key. A few words about the public key will be shared momentarily. Thus **our second job is to create a public and private key**.
+`gpg` has also discovered a way to create a key that can only be unlocked by your **private** key. This associated key is known as your **public** key. A few words about the public key will be shared momentarily. We can think of the **public key** as being a magic wand that anyone can swish over a post card to us that renders the text unreadable to anyone not holding the **private key**. Thus once he has a workshop, `gpg`'s job is **to create a public and private key**.
 
-But because `gpg` is giving you the "master keys" for a special and unique lock, it is unwise to go around carrying the one true key with you. You'd really like to create _copies_ that could be lost without requiring you to ask `gpg` for a brand-new, custom lock and key combination again. These duplicates are called "sub-keys." They are fine to carry around. You can leave your master key in a vault at home and walk around with your sub-keys on a USB drive. And, because `gpg` is so clever, if ever you lose your sub-key or think someone has made a copy of it, if you hold your master key and shout "`revoke key!`" it and any copies of it ever made will become instantly worthless!
+But because `gpg` is giving you the "master keys" for a special and unique lock, it is unwise to go around carrying the one true **private key** with you. You'd really like to create _copies_ that could be lost without requiring you to ask `gpg` for a brand-new, custom lock and key combination again. These duplicates are called "sub-keys." They are fine to carry around. You can leave your master key in a vault at home and walk around with your sub-keys on a USB drive. And, because `gpg`'s keys are so powerful, if ever you lose your sub-key or think someone has made a copy of it, if you hold your master key and shout "`revoke key!`" your copy and any illicitly-made copies of it ever made will become instantly worthless!
 
 (wow! a magical locksmith!)
 
@@ -265,8 +265,6 @@ You're done. Take this Tails USB key and hide it away! Take the USB key with you
 OSX operates as Linux.
 
 [Gpg4Win]: https://www.gpg4win.org/
-
-
 [Tails Installation Assistant]: https://tails.boum.org/install/index.en.html
 [TPV]: https://tails.boum.org/doc/first_steps/persistence/configure/index.en.html
 [Tails]: https://tails.boum.org
