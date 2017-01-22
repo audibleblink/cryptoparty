@@ -125,6 +125,23 @@ to day but if ever they get lost or stolen you can generate _new_ copies. Even
 better than real life is that if you lose your subkeys, you can "cancel" or
 "revoke" them so they can't be used! Awesome!
 
+## Tails: A Safe Place
+
+Now, when our original wand was created, we told `gpg` a secret password which
+it used to create the original wand-pair. What if the room where `gpg` did that
+had been electronically bugged? Why then a Nasty Wizard would have heard your
+password and, provided he could steal your private wand, he could use it and
+pretend to be you!
+
+We have to make sure we generate our wands, and keys in a guaranteed safe
+place. If your laptop has been infiltrated through a spam or phishing or
+malware hack, it **is not a safe place**. To make sure `gpg` gets to operate in
+a safe house (or safe operating system) we create our keys in Tails - it's like
+a brand new operating system each time you boot up!  For this reason it's
+called an "amnesiac" operating system. Because it's a read-only operating
+system nothing you view on the internet can "infect" it and compromise the
+safety of the room where gpg works.
+
 ## Giving GPG a Safe Workshop
 
 ### Step: Get a Tails System
