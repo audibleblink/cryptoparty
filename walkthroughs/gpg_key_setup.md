@@ -34,6 +34,81 @@ club!
 **NOTE**: Recent-model Macs _cannot_ be used to run Tails. The wireless
 hardware is not supported by Tails. You _might_ be able to use a wired
 connection.
+
+## Metaphor: Public Key Cryptography as "Public Wand Magic"
+
+Before we get started, walkthroughs tend to follow a format where someone who
+(purportedly) already knows what's going on tells the reader step-by-step to
+type some impenetrable commands to produce some result. We don't think that's
+nearly educational enough. In order to ease understanding, I'd like to present
+a metaphor here so that, even if you don't understand the exact commands
+exactly, you can try to see how the steps into a game plan. Then, at the very
+least you can talk in terms of the metaphor with someone and frame questions
+more easily (we hope!).
+
+It's a little hard to associate cryptography (hard math with 1's and 0's inside
+a computer) with physical security systems (locks, bolts, keys, etc.) made of
+metal, so we're not going to even try. Let's recall magical wands from the
+world of fantasy.
+
+We know of a wand-maker called `gpg`. For many years now, `gpg` has come to
+visit new encryption wizards.  He creates for you two magic wands: a "public
+wand" and a "private wand." First he crafts the "private wand." He asks you for
+a secret password (this should be a strong password that's hard for a Nasty
+Wizard to guess!) and whispers it to the wand. In a great flurry of magic the
+"secret wand" is made! He then asks your secret wand to create a "public wand."
+With a flick of the wrist your "private wand" summons materials and creates a
+single public wand. It then shares a little bit of its own magical secret with
+the public wand in order to give it magical power. Forever shall these two
+wands have a special relationship between them but the "private wand" is more
+powerful. They exist as a pair. We could call these a "wand-pair." To keep
+things clear let's call these the "original wand-pair."
+
+The secret wand of your original wand-pair can also create "sub-wands," wands:
+new wand-pairs that recognize your original "private wand" as being the boss.
+Consequently if the original tells them to go *poof* out of existence, *they
+will*.
+
+The public wand can be used to do magic that can only be un-done by the private
+wand.
+
+Let's imagine that in your neighborhood, packages delivered by owls are
+frequently stolen while wizards are at the office. You could leave your public
+wand out on your doorstep. Then, when a delivery happens, someone could use
+your public wand to turn the package into a 3 tonne weight (very hard to
+steal!). When you arrive home you see that your way is blocked by a 3 tonne
+weight so you use your _private_ wand to undo the spell done by your _public
+wand_. The _private wand_ summons a magical cloud that searches the boulder to
+see if it was created by its _public wand_ brother. Finding that this is so,
+the private wand asks you to whisper the secret password it was created with.
+You whisper the word to the _private wand_ and - _presto_ - the weight becomes
+your package.  You take it inside and open up your new slippers.
+
+Now, this has a small problem. No one wants to have to walk to your doorstep.
+Maybe your mom wants to send you a map that points to some buried treasure. She
+doesn't want to have to come from her house in the country to your doorstep to
+turn the map into a 3 tonne weight. What she'd really like is for your public
+wand to come to her, or to have a copy of your public wand at her house. As it
+so happens, you can ask `gpg` to create duplicates of your public wand that you
+can send to your friends and family or even put on the internet.
+
+"But wait, aren't these wands dangerous to let loose?"
+
+You must guard your _*secret*_ wand as well as you possibly can. But *public*
+wands can be safely shared. They can only _do_ a transformation, they can't
+_un-do_ it! And private wands can only un-do a transformation they they or
+their public wand brother did.
+
+This is powerful magic indeed. Your private wand can also be used to make a
+signature. You can use it to sign a letter and anyone can use your public wand
+to make sure that your signature is valid! By virtue of the special
+relationship between the public and private wands, many interesting
+applications can be created!
+
+This ends our metaphor of public key cryptography as wands. In case you didn't
+guess, "wand," in cryptography, is the same as "key." This is the essence of
+public key cryptography.
+
 ## Public Key Cryptography
 
 We generate a "keypair" a public key and a private key. We'll call this your
