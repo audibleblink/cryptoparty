@@ -34,6 +34,22 @@ club!
 **NOTE**: Recent-model Macs _cannot_ be used to run Tails. The wireless
 hardware is not supported by Tails. You _might_ be able to use a wired
 connection.
+## Public Key Cryptography
+
+We generate a "keypair" a public key and a private key. We'll call this your
+"original keypair." Messages encoded with your public key can only be decoded
+with your private key (maybe a new password for your email account). Messages
+encoded with your private key can only be decoded with your private key (maybe
+your diary).
+
+Your original key pair can create sub-keys which can live independent lives
+*but* which can be canceled by the original parent key-pair.  Just like getting
+keys to an apartment: it's wise to make copies of the keys the landlord gives
+you and to keep the originals locked somewhere safe. You use the _copies_ day
+to day but if ever they get lost or stolen you can generate _new_ copies. Even
+better than real life is that if you lose your subkeys, you can "cancel" or
+"revoke" them so they can't be used! Awesome!
+
 ## Giving GPG a Safe Workshop
 
 ### Step: Get a Tails System
