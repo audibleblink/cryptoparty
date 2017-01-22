@@ -16,6 +16,24 @@ club!
 
 * 1-3 USB Sticks with 4GB or more of space
 
+## Preparation
+
+* [Tails Live USB Stick][]: [Tails][] is a system for creating an "amnesiac"
+  operating system. That means it's an operating system like Windows, OS X, or
+  Linux that operates your computer's hardware and gives you a way to make your
+  computer do work. You need to follow the
+  [Installation Instructions document][Tails Installation]. To do this from
+  scratch requires **2 USB sticks**.  At the end of our process this Tails
+  stick **will have all your precious encryption keys**. You're going to put it
+  somewhere safe (keep at home, lock in a safe, keep in a safe-deposit box,
+  etc.) so don't plan on using it for other day-to-day needs.
+* **Daily-use USB stick**: Blank. We'll need this to transfer your "daily use"
+  key to your daily use computer (the one that might get stolen or compromised
+  by bad people).
+
+**NOTE**: Recent-model Macs _cannot_ be used to run Tails. The wireless
+hardware is not supported by Tails. You _might_ be able to use a wired
+connection.
 ## Giving GPG a Safe Workshop
 
 ### Step: Get a Tails System
