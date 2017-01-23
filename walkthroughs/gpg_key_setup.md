@@ -28,7 +28,7 @@ la "Harry Potter"). We hope this provides a conceptual framework.
 
 ## Preparation
 
-* [Tails Live USB Stick][]: [Tails][] is a system for creating an "amnesiac"
+* [Tails Live USB Stick][Tails]: [Tails][] is a system for creating an "amnesiac"
   operating system. That means it's an operating system like Windows, OS X, or
   Linux that operates your computer's hardware and gives you a way to make your
   computer do work. You need to follow the
