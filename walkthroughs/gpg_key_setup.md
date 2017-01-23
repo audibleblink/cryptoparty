@@ -227,15 +227,38 @@ does on credit cards and for the same purpose. Since this key will be protected 
 10. **SELECT A VERY STRONG PASSWORD** A weak password is the same as leaving your key under the mat. Make this very difficult to guess and / or store it in a password manager.
 11. Re-enter it to confirm
 
-Here we see "Tutorial" has an identity of `7EC9E024`. Henceforth in this guide use your name and key ID instead of these two bits of data.
+Here's an example of what the output should look like:
 
-We also must prepare for the worst. Let's suppose somehow your master key becomes compromised. You need an "anti-key" that will cancel the master key. This is called a "revocation certificate." We create it right now in the most optimistic moment and we save it in a safe place, on our Persistent volume.
+![Generated GPG Keypair](./keygen-walkthru-images/generated-prime-keypair.jpg)
+
+Here we see "Tutorial" has an identity of `7EC9E024`. Henceforth in this guide
+will use these two identifiers, but if you're typing along, use your name and
+key ID instead.
+
+We also must prepare for the worst. Let's suppose somehow your master key
+becomes compromised. You need an "anti-key" that will cancel the master key.
+This is called a "revocation certificate." We create it right now in the most
+optimistic moment and we save it in a safe place, on our Persistent volume.
 
 Since "Tutorial" is `7EC9E024` I'll issue the following command.
 
-`gpg --output ~/.gnupg/revoke.asc --gen-revoke 7EC9E024` Then comfirm **y** to create the certificate and accept default 1. Enter an optional description. Given that you're revoking your most-precious key, I think it's hard to come up with a good thing to put here, so I'd leave it blank. Accept with **y**. You'll be prompted for your secret key password.
+`gpg --output ~/.gnupg/revoke.asc --gen-revoke 7EC9E024`
 
-Congratulations! You now have your cryptographic keys.
+Then confirm **y** to create the certificate and accept default 1. Enter an
+optional description.  Given that you're revoking your most-precious key, I
+think it's hard to come up with a good thing to put here, so I'd leave it
+blank. Accept with **y**. You'll be prompted for your secret key password.
+
+Congratulations! You now have your cryptographic keys. They are generated and
+stored in your `~/.gnupg` directory which as per our earlier configuration of
+Tails, is on the Persistent drive. You have also created a revocation
+certificate which is also in `~/.gnupg` in the file `revoke.asc`.
+
+Again, if someone gets your Tails USB key and knows your Persistent password
+**they can get your secret key and do things as you!**. Or, they could get your
+`revoke.asc` and revoke your key!
+
+**!!! IT IS VERY IMPORTANT TO KEEP THIS USB KEY SAFE !!!**
 
 ## Create Subkeys for Daily use
 
