@@ -71,13 +71,13 @@ a read-only operating system nothing you view on the Internet can write to it,
 endorsement, Tails was the operating system Edward Snowden used to communicate
 and to distribute his document cache.
 
-### Step: Get a Tails System
+### Step 1: Get a Tails System
 
 _Skip this step if you already have a Tails boot stick_
 
 The [Tails Installation Assistant][] should help you get your bootable USB stick.
 
-### Step: Add a Persistent Volume To Your Stick
+### Step 2: Add a Persistent Volume To Your Tails Installation
 
 _Skip this step if your Tails boot stick already has a persistent volume **and** has enabled GnuPG. If you don't know what this means, follow these steps._
 
@@ -97,7 +97,7 @@ If a Bad Guy gets your Tails USB key and knows the persistent password they can 
 
 After this step [restart Tails][].
 
-### Step: Reboot Into Tails
+### Step 3: Reboot Into Tails
 
 Upon reboot, you should see this (again). This time you'll need to say YES.
 
@@ -109,7 +109,7 @@ You'll want to both enable an Administrator Password and Enable Persistence.
 
 _The "Tails Greeter"_
 
-### Step: Log Into Tails with an Administrator Password
+### Step 4: Log Into Tails with an Administrator Password
 
 ![Tails Admin Assistant](./keygen-walkthru-images/Tails-1-2-welcome-to-Tails.jpg)
 
@@ -117,16 +117,16 @@ Here set an admin password. This need not be extremely secure, we're only going
 to use it for this current Tails session. On the other hand, don't forget it or
 you'll have to restart this process.
 
-### Step: Enable Persistence
+### Step 5: Enable Persistence
 
 Since we set up a persistence volume in a previous step, also provide that
 password here. Here's [Tails Guide to Using a Persistent Volume][TPVu]
 
-### Step: Login
+### Step 6: Login
 
 Click the "Login" button to log into Tails.
 
-### Step: Verify Configuration
+### Step 7: Verify Configuration
 
 Double-click on the desktop and select "Open Terminal." We're going to use a
 tool called `du` which stands for "disk usage" to tell us where Tails thinks
@@ -169,9 +169,9 @@ system ready, we can move forward with creating the keys. Next we'll
 immediately give an overview of our game plan and then we'll cut to doing the
 commands.
 
-## Step: Make the Battle Plan
+## Step 8: Make the Battle Plan
 
-### Sub-Step: Generate the Prime Keypair
+### Sub-Step 8a: Generate the Prime Keypair
 
 As discussed above and elsewhere, public key cryptography works by having a
 **public key** and a **private key**. We will make those. But these keys are a
@@ -185,7 +185,7 @@ your prime keypair and store it on the persistent Tails directory. That's why
 your Tails USB key is so important and why, after we generate your keys, it
 shouldn't be carried around day-to-day.
 
-### Sub-Step: Generate the Sub-keys
+### Sub-Step 8b: Generate the Sub-keys
 
 The next thing we'll do is generate a day-to-day keypair which acknowledges
 your prime keypair as its superior. Should your day-to-day keypair ever become
@@ -195,7 +195,7 @@ keypair which says "I DO NOT TRUST THIS ANYMORE AND YOU SHOULDN'T TRUST IT
 EITHER!" Then, you can generate a new day-to-day keypair, put it on your new
 laptop and you're back in business.
 
-### Sub-Step: Secure the Prime Keypair
+### Sub-Step 8c: Secure the Prime Keypair
 
 * Create a _sub-key_
 * Put the _sub-key_ somewhere you can use it regularly
@@ -203,7 +203,7 @@ laptop and you're back in business.
 
 ## Put GPG to Work
 
-### Create the Public / Private Pair
+### Step 9: Create the Public / Private Pair
 
 _As a supplementary reference, see [The GnuPG Manual](https://www.gnupg.org/gph/en/manual/c14.html)_
 
@@ -260,7 +260,7 @@ Again, if someone gets your Tails USB key and knows your Persistent password
 
 **!!! IT IS VERY IMPORTANT TO KEEP THIS USB KEY SAFE !!!**
 
-## Create Subkeys for Daily use
+## Step 10: Create Subkeys for Daily use
 
 Now, we just said we want to keep our "prime keypair" safe. They should be kept
 safe in a safe-deposit box or wall-safe. How can we get the benefits of GPG
@@ -309,7 +309,7 @@ want to create an encryption subkey. Follow the same steps as above but specify
 "(6) RSA (encrypt only)." Similarly the parent key (`7EC9E024`) should be used to
 sign any newly created keys.
 
-## Step: Switch!
+## Step 11: Switch!
 
 `cp -r ~/.gnupg ~/Persistent/gnupg-master-Tutorial-7EC9E024`
 
@@ -321,7 +321,7 @@ information.
 Our next steps are going to do **DESTRUCTIVE** changes on what's in `~/.gnupg`,
 but won't touch the other directory.
 
-## Step: Remove the "Prime" Key-pair
+## Step 12: Remove the "Prime" Key-pair
 
 Take a look at the key database with `gpg --list-secret-keys`
 
@@ -357,7 +357,7 @@ Lastly, the password on this "de-mastered" keyring is still the same as your
 original strong password. Apply your third (and final) password to this key
 with: `gpg --edit-key 7EC9E024 passwd`
 
-## Step: Move Daily-use Credentials
+## Step 13: Move Daily-use Credentials
 
 At this point, on your Tails installation you have your master credentials. We
 now need to get your daily-use credentials on your second USB stick so that you
@@ -379,7 +379,7 @@ new USB disk and copy the subkey information onto the drive."
 9. `gpg --export-secret-key -a  ENCRYPTION_SUBKEY_ID > private.key`: write out your public key, you'll want to share this with the world so people can contact you securely!
 10. `cd && sudo umount /mnt`
 
-## Cleanup
+## Step 14: Cleanup
 
 Let's make the default GPG directory for Tails the one that has your secret key.
 
@@ -391,7 +391,7 @@ First, [restart Tails][]. This will clean up all your vulnerable data.  Take
 the Tails USB key and hide it away! Take the USB key with your subkeys. We're
 now going to make those keys available for your use.
 
-## Reboot / Visit your standard Machine
+## Step 15: Reboot / Visit your standard Machine
 
 ### Linux
 
@@ -416,12 +416,22 @@ You might see some warning about upgrading the key. This is fine.
 
 OSX operates as Linux.
 
+## Conclusion
+
+Congratulations. You now have:
+
+* 1 Tails USB disk with a persistent directory that stores all your "master" encryption data
+* 1 USB key that has your public-use subkey that can be used on a "daily" system
+
+You can now share your daily-use subkey public key so that people can send you
+messages to be decrypted with your private key.
+
 [Gpg4Win]: https://www.gpg4win.org/
-[Tails Installation Assistant]: https://tails.boum.org/install/index.en.html
 [TPV]: https://tails.boum.org/doc/first_steps/persistence/configure/index.en.html
-[Tails]: https://tails.boum.org
+[TPVu]: https://tails.boum.org/doc/first_steps/persistence/use/index.en.html
+[Tails Installation Assistant]: https://tails.boum.org/install/index.en.html
 [Tails Installation]: https://tails.boum.org/doc/index.en.html
+[Tails]: https://tails.boum.org
+[restart Tails]: https://tails.boum.org/doc/first_steps/shutdown/index.en.html.
 [strong]: http://www.howtogeek.com/195430/how-to-create-a-strong-password-and-remember-it/
 [wand metaphor]: ./public_key_crypto_metaphor.md
-[restart Tails]: https://tails.boum.org/doc/first_steps/shutdown/index.en.html.
-[TPVu]: https://tails.boum.org/doc/first_steps/persistence/use/index.en.html
