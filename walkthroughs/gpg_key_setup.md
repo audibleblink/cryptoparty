@@ -42,11 +42,12 @@ la "Harry Potter"). We hope this provides a conceptual framework.
   by bad people).
 * **3** [strong passwords][strong]
 
-**NOTE**: Recent-model Macs _cannot_ be used to run Tails. The wireless
-hardware is not supported by Tails. You _might_ be able to use a wired
-connection but this varies with the year and model of your laptop. By way of
-comparison, last year model PCs tend to work well. The author used a 5000
-series Dell Latitude for testing.
+**NOTE**: Recent-model Macs _cannot_ be used to run Tails. While you
+**certainly** can create a Tails USB key on a Mac, many recent-generation Mac
+laptops use a proprietary wireless card driver that Linux (and thus Tails) do
+not support.  You _might_ be able to use a wired connection but this varies
+with the year and model of your laptop. By way of comparison, last year model
+PCs tend to work well. The author used a 5000 series Dell Latitude for testing.
 
 ## Tails: A Safe Place
 
