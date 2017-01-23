@@ -422,6 +422,6 @@ OSX operates as Linux.
 [Tails]: https://tails.boum.org
 [Tails Installation]: https://tails.boum.org/doc/index.en.html
 [strong]: http://www.howtogeek.com/195430/how-to-create-a-strong-password-and-remember-it/
-[wand metaphor]: ./walkthroughs/public_key_crypto_metaphor.md
+[wand metaphor]: ./public_key_crypto_metaphor.md
 [restart Tails]: https://tails.boum.org/doc/first_steps/shutdown/index.en.html.
 [TPVu]: https://tails.boum.org/doc/first_steps/persistence/use/index.en.html
