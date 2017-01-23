@@ -65,13 +65,11 @@ as you!
 
 To make sure `gpg` gets to operate in a safe house (or safe operating system)
 we create our keys in Tails - it's like a brand new operating system each time
-you boot up!  For this reason it's called an "amnesiac" operating system.
-Because it's a read-only operating system nothing you view on the internet can
-"infect" it and compromise the safety of the room where `gpg` works. Tails was
-the operating system Edward Snowden used to communicate and to distribute his
-document cache.
-
-## Giving GPG a Safe Environment
+you boot up!  For this reason it's called an "amnesiac" operating system.  It's
+a read-only operating system nothing you view on the Internet can write to it,
+"infect" it and compromise the safety of the room where `gpg` works. By way of
+endorsement, Tails was the operating system Edward Snowden used to communicate
+and to distribute his document cache.
 
 ### Step: Get a Tails System
 
