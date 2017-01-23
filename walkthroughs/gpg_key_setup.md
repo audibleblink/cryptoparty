@@ -387,34 +387,27 @@ Let's make the default GPG directory for Tails the one that has your secret key.
 2. `cp ~/Persistent/gnupg-master-Tutorial-7EC9E024/* ~/.gnupg`
 3. `gpg -K` should show that your private key is the real deal (i.e. no `sec#` but rather `sec`)
 
-You're done. Take this Tails USB key and hide it away! Take the USB key with your subkeys and start encrypting and decryting with it. Publish that key far and wide!
+First, [restart Tails][]. This will clean up all your vulnerable data.  Take
+the Tails USB key and hide it away! Take the USB key with your subkeys. We're
+now going to make those keys available for your use.
 
-## Reboot into your Standard Operating System
+## Reboot / Visit your standard Machine
 
 ### Linux
 
-* Power off Tails and put that USB key in a vault
-* Power on your typical operating system (in my case, Ubuntu)
-* If you have no pre-existing ~/.gnupg directory
-  * Copy the contents of the sub-key USB key (in the `gnupg` directory) into ~/.gnupg
-  * `cd $HOME/.gnupg`
-  * `gpg -K` (`gpg` performs an upgrade)
-  * See the sub-key output (`sec#`)
-* If you have a pre-existing ~/.gnupg directory, you can import the key files you generated:
-  * Change to the USB key directory in the terminal
-  * `gpg --import public_key.gpg`
-  * `gpg --import private_key.gpg`
-* All set!
+* `gpg -k` will initialize a directory if required
+* Plug in your subkeys USB key
+* `gpg --import /path/to/key/public.key`
+* `gpg --import /path/to/key/private.key`
+
+You might see some warning about upgrading the key. This is fine.
 
 ### Windows
 
-* Power off Tails and put that USB key in a vault
-* Power on your typical operating system
 * Install [Gpg4Win][]
 * Open "Kleopatra" – Installed as part of the [Gpg4Win][] install
 * Click "Import Certificates"
 * Browse to your USB key
-* Find your `gnupg` directory
 * Select your private key file
 * Repeat the above for your public key file
 * All set!
@@ -428,3 +421,7 @@ OSX operates as Linux.
 [TPV]: https://tails.boum.org/doc/first_steps/persistence/configure/index.en.html
 [Tails]: https://tails.boum.org
 [Tails Installation]: https://tails.boum.org/doc/index.en.html
+[strong]: http://www.howtogeek.com/195430/how-to-create-a-strong-password-and-remember-it/
+[wand metaphor]: ./walkthroughs/public_key_crypto_metaphor.md
+[restart Tails]: https://tails.boum.org/doc/first_steps/shutdown/index.en.html.
+[TPVu]: https://tails.boum.org/doc/first_steps/persistence/use/index.en.html
