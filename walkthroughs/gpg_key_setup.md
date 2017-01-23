@@ -22,7 +22,9 @@ la "Harry Potter"). We hope this provides a conceptual framework.
 
 ## Ingredients
 
-* 1-3 USB Sticks with 4GB or more of space
+* 1-3 USB Sticks with 4GB or more of space. If you don't already have a Tails
+  instance, you'll need 3. If you already have a USB stick running Tails,
+  you'll need one additional stick.
 
 ## Preparation
 
@@ -38,119 +40,36 @@ la "Harry Potter"). We hope this provides a conceptual framework.
 * **Daily-use USB stick**: Blank. We'll need this to transfer your "daily use"
   key to your daily use computer (the one that might get stolen or compromised
   by bad people).
+* **3** [strong passwords][strong]
 
 **NOTE**: Recent-model Macs _cannot_ be used to run Tails. The wireless
 hardware is not supported by Tails. You _might_ be able to use a wired
-connection.
-
-## Metaphor: Public Key Cryptography as "Public Wand Magic"
-
-Before we get started, walkthroughs tend to follow a format where someone who
-(purportedly) already knows what's going on tells the reader step-by-step to
-type some impenetrable commands to produce some result. We don't think that's
-nearly educational enough. In order to ease understanding, I'd like to present
-a metaphor here so that, even if you don't understand the exact commands
-exactly, you can try to see how the steps into a game plan. Then, at the very
-least you can talk in terms of the metaphor with someone and frame questions
-more easily (we hope!).
-
-It's a little hard to associate cryptography (hard math with 1's and 0's inside
-a computer) with physical security systems (locks, bolts, keys, etc.) made of
-metal, so we're not going to even try. Let's recall magical wands from the
-world of fantasy.
-
-We know of a wand-maker called `gpg`. For many years now, `gpg` has come to
-visit new encryption wizards.  He creates for you two magic wands: a "public
-wand" and a "private wand." First he crafts the "private wand." He asks you for
-a secret password (this should be a strong password that's hard for a Nasty
-Wizard to guess!) and whispers it to the wand. In a great flurry of magic the
-"secret wand" is made! He then asks your secret wand to create a "public wand."
-With a flick of the wrist your "private wand" summons materials and creates a
-single public wand. It then shares a little bit of its own magical secret with
-the public wand in order to give it magical power. Forever shall these two
-wands have a special relationship between them but the "private wand" is more
-powerful. They exist as a pair. We could call these a "wand-pair." To keep
-things clear let's call these the "original wand-pair."
-
-The secret wand of your original wand-pair can also create "sub-wands," wands:
-new wand-pairs that recognize your original "private wand" as being the boss.
-Consequently if the original tells them to go *poof* out of existence, *they
-will*.
-
-The public wand can be used to do magic that can only be un-done by the private
-wand.
-
-Let's imagine that in your neighborhood, packages delivered by owls are
-frequently stolen while wizards are at the office. You could leave your public
-wand out on your doorstep. Then, when a delivery happens, someone could use
-your public wand to turn the package into a 3 tonne weight (very hard to
-steal!). When you arrive home you see that your way is blocked by a 3 tonne
-weight so you use your _private_ wand to undo the spell done by your _public
-wand_. The _private wand_ summons a magical cloud that searches the boulder to
-see if it was created by its _public wand_ brother. Finding that this is so,
-the private wand asks you to whisper the secret password it was created with.
-You whisper the word to the _private wand_ and - _presto_ - the weight becomes
-your package.  You take it inside and open up your new slippers.
-
-Now, this has a small problem. No one wants to have to walk to your doorstep.
-Maybe your mom wants to send you a map that points to some buried treasure. She
-doesn't want to have to come from her house in the country to your doorstep to
-turn the map into a 3 tonne weight. What she'd really like is for your public
-wand to come to her, or to have a copy of your public wand at her house. As it
-so happens, you can ask `gpg` to create duplicates of your public wand that you
-can send to your friends and family or even put on the internet.
-
-"But wait, aren't these wands dangerous to let loose?"
-
-You must guard your _*secret*_ wand as well as you possibly can. But *public*
-wands can be safely shared. They can only _do_ a transformation, they can't
-_un-do_ it! And private wands can only un-do a transformation they they or
-their public wand brother did.
-
-This is powerful magic indeed. Your private wand can also be used to make a
-signature. You can use it to sign a letter and anyone can use your public wand
-to make sure that your signature is valid! By virtue of the special
-relationship between the public and private wands, many interesting
-applications can be created!
-
-This ends our metaphor of public key cryptography as wands. In case you didn't
-guess, "wand," in cryptography, is the same as "key." This is the essence of
-public key cryptography.
-
-## Public Key Cryptography
-
-We generate a "keypair" a public key and a private key. We'll call this your
-"original keypair." Messages encoded with your public key can only be decoded
-with your private key (maybe a new password for your email account). Messages
-encoded with your private key can only be decoded with your private key (maybe
-your diary).
-
-Your original key pair can create sub-keys which can live independent lives
-*but* which can be canceled by the original parent key-pair.  Just like getting
-keys to an apartment: it's wise to make copies of the keys the landlord gives
-you and to keep the originals locked somewhere safe. You use the _copies_ day
-to day but if ever they get lost or stolen you can generate _new_ copies. Even
-better than real life is that if you lose your subkeys, you can "cancel" or
-"revoke" them so they can't be used! Awesome!
+connection but this varies with the year and model of your laptop. By way of
+comparison, last year model PCs tend to work well. The author used a 5000
+series Dell Latitude for testing.
 
 ## Tails: A Safe Place
 
-Now, when our original wand was created, we told `gpg` a secret password which
-it used to create the original wand-pair. What if the room where `gpg` did that
-had been electronically bugged? Why then a Nasty Wizard would have heard your
-password and, provided he could steal your private wand, he could use it and
-pretend to be you!
+Why do we need Tails to generate encryption keys?  In short, you don't know if
+your laptop has been compromised.
 
-We have to make sure we generate our wands, and keys in a guaranteed safe
-place. If your laptop has been infiltrated through a spam or phishing or
-malware hack, it **is not a safe place**. To make sure `gpg` gets to operate in
-a safe house (or safe operating system) we create our keys in Tails - it's like
-a brand new operating system each time you boot up!  For this reason it's
-called an "amnesiac" operating system. Because it's a read-only operating
-system nothing you view on the internet can "infect" it and compromise the
-safety of the room where gpg works.
+* Your employer might have installed a keyboard logger (which would capture the password you used to initialize your key).
+* You might have fallen prey to an email-based malware months ago that has remained resident on your computer for many months now.
+* The library computer where you generate your keys has been compromised, etc.
 
-## Giving GPG a Safe Workshop
+If you're familiar with [the metaphor][wand metaphor]: what if someone had
+bugged the wizard's workshop when he was making your wand: saw the ingredients,
+hears the magical password? They could clone _your_ wand and act as you!
+
+To make sure `gpg` gets to operate in a safe house (or safe operating system)
+we create our keys in Tails - it's like a brand new operating system each time
+you boot up!  For this reason it's called an "amnesiac" operating system.
+Because it's a read-only operating system nothing you view on the internet can
+"infect" it and compromise the safety of the room where `gpg` works. Tails was
+the operating system Edward Snowden used to communicate and to distribute his
+document cache.
+
+## Giving GPG a Safe Environment
 
 ### Step: Get a Tails System
 
@@ -160,73 +79,124 @@ The [Tails Installation Assistant][] should help you get your bootable USB stick
 
 ### Step: Add a Persistent Volume To Your Stick
 
-_Skip this step if your Tails boot stick already has a persistent volume **and** has enabled GnuPG_
+_Skip this step if your Tails boot stick already has a persistent volume **and** has enabled GnuPG. If you don't know what this means, follow these steps._
 
-Follow the [Tails Persistence Volume][TPV] for both "Personal Files" and "GnuPG."
+Boot up your Tails installation.
 
-You will be prompted to add a password on this volume.
+![Tails Greeter](./keygen-walkthru-images/tails-greeter-welcome-to-tails.png)
 
-# IT IS VERY IMPORTANT THAT YOU CHOOSE A STRONG PASSWORD HERE.
+You will click the "Login" button. No complications this first time through!
 
-This password can be one of the two listed in the Ingredients section. If someone can decrypt your persistent volume, they will gain access to your master cryptographic keys. This would be **VERY BAD**. Think of it like someone getting the plans for the lock in your front door. With those plans they come into your house unnoticed. In the cryptography world they can, effectively _be_ you: spread falsehoods with your "stamp" of approval. If you have difficulty remembering strong passwords, a password manager application would be a prudent investment.
+Follow the [Tails Persistence Volume][TPV] instructions for creating a
+Persistent Volume for both "Personal Files" and "GnuPG." You will be prompted
+to add a password on this volume.
 
-### Step: Boot Into Tails
+**IMPORTANT**: It's **VERY** important that you use a strong password here.
 
-When you see this, you'll know you're ready to go with Tails.
+If a Bad Guy gets your Tails USB key and knows the persistent password they can gain access to your master cryptographic keys -- **the private key will be vulnerable**  This is a VERY BAD THING!
 
-![Tails Greeter](keygen-walkthru-images/tails-greeter-welcome-to-tails.png)
+After this step [restart Tails][].
+
+### Step: Reboot Into Tails
+
+Upon reboot, you should see this (again). This time you'll need to say YES.
+
+![Tails Greeter](./keygen-walkthru-images/tails-greeter-welcome-to-tails.png)
+
+Say "Yes" and you will be greeted with the Tails Admin Assistant:
+
+You'll want to both enable an Administrator Password and Enable Persistence.
 
 _The "Tails Greeter"_
 
 ### Step: Log Into Tails with an Administrator Password
 
-When reach the Tails Greeter, you have the option to configure "More Options." Say "Yes" and you will be greeted with the Tails Admin Assistant:
-
 ![Tails Admin Assistant](./keygen-walkthru-images/Tails-1-2-welcome-to-Tails.jpg)
 
-Here set an admin password. This need not be extremely secure, we're only going to use it for this current Tails session. 
+Here set an admin password. This need not be extremely secure, we're only going
+to use it for this current Tails session. On the other hand, don't forget it or
+you'll have to restart this process.
 
-Since we set up a persistence volume in the previous step, also provide that password here.
+### Step: Enable Persistence
+
+Since we set up a persistence volume in a previous step, also provide that
+password here. Here's [Tails Guide to Using a Persistent Volume][TPVu]
+
+### Step: Login
 
 Click the "Login" button to log into Tails.
 
 ### Step: Verify Configuration
 
-Double-click on the desktop and select "Open Terminal."
+Double-click on the desktop and select "Open Terminal." We're going to use a
+tool called `du` which stands for "disk usage" to tell us where Tails thinks
+the directory comes from. It would be like looking at a mail address and saying
+"Oh, this house is in New York City" because the address says so. You should be
+able to ask the owner where the house stands as well and get the same answer.
+Here we're going to make sure that the `.gnupg` and `~/Persistent` directories
+comes from the "Persistent Data" neighborhood.
 
 Enter the following commands:
 
 `cd ~/.gnupg`  
 `df .`  
+
+You should see something like the following:
+
+![Tails Admin Assistant](./keygen-walkthru-images/du_gnupg_dir_verify-1.png)
+
+This directory should be on a device called `TailsData_unlocked`.
+
 `cd ~/Persistent`  
 `df .`  
+
+You should see something like the following:
+
+![Tails Admin Assistant](./keygen-walkthru-images/du_gnupg_dir_verify-2.png)
+
+This directory should be on a device called `TailsData_unlocked`.
+
 `cd`  
 `df .`  
 
-These steps are used to show that `~/.gnupg` and `~/Persistent` directories are on a device called `TailsData_unlocked` while the last directory (the "home directory") is on something called `aufs` which is "Mounted on" `/`. If these line up with your system, you're on the right path.
+![Tails Admin Assistant](./keygen-walkthru-images/du_gnupg_dir_verify-3.png)
+
+The last directory (the "home directory") is on something called `aufs` which
+is "Mounted on" `/`.
+
+If these line up with your system, you're on the right path. With a Tails
+system ready, we can move forward with creating the keys. Next we'll
+immediately give an overview of our game plan and then we'll cut to doing the
+commands.
 
 ## Step: Make the Battle Plan
 
-Public key cryptography works by having:
+### Sub-Step: Generate the Prime Keypair
 
-* A private key
-* A public key
+As discussed above and elsewhere, public key cryptography works by having a
+**public key** and a **private key**. We will make those. But these keys are a
+bit like the ones you get from the landlord when you move into your apartment:
+they're the originals and they should be copied so that if you lose them you
+can generate more.
 
-The essential point is that you can share your public key with all the world. In fact, you want all the world to know your public key. Your public and private keys have a (mathematical) relationship. Content encoded with your _public_ key can only be decrypted by your _private_ key. Content encrypted by your _private_ key can only be _decrypted_ by your private key.
+Your first public and private key (your "prime" keypair) should be put
+somewhere safe where they can never be corrupted. So we're going to generate
+your prime keypair and store it on the persistent Tails directory. That's why
+your Tails USB key is so important and why, after we generate your keys, it
+shouldn't be carried around day-to-day.
 
-As an example: someone you meet at a conference might take your _public_ key, encrypt a message, and send it to you. You might use your _private_ key to encrypt your list of Christmas shopping to keep prying eyes from guessing their gift.
+### Sub-Step: Generate the Sub-keys
 
-This represents the _simplest_ case. But, unfortunately, things in the real world aren't that simple. Consider:
+The next thing we'll do is generate a day-to-day keypair which acknowledges
+your prime keypair as its superior. Should your day-to-day keypair ever become
+compromised (the laptop they live on gets stolen), you can get a new machine,
+your Tails key, and can generate a revocation certificate for the stolen
+keypair which says "I DO NOT TRUST THIS ANYMORE AND YOU SHOULDN'T TRUST IT
+EITHER!" Then, you can generate a new day-to-day keypair, put it on your new
+laptop and you're back in business.
 
-Suppose you have your private key on a laptop:
+### Sub-Step: Secure the Prime Keypair
 
-* What if the laptop gets stolen? The jig is up.
-* What if you're sent a malware attachment in email that you open and the malware forwards on your private key?
-
-Our strategy is this:
-
-* Create a private key
-* Create a public key
 * Create a _sub-key_
 * Put the _sub-key_ somewhere you can use it regularly
 * Put the "master" private key somewhere safe
