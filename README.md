@@ -5,7 +5,7 @@
 
 ### E-Mail
   - Thunderbird + Enigmail
-  - keybase.io
+  - [Keybase.io](./walkthroughs/Keybase.io.md)
   - [Proton Mail](./walkthroughs/Proton Mail.md)
 
 ### Mobile Messaging
