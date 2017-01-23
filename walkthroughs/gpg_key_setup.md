@@ -143,7 +143,7 @@ Enter the following commands:
 
 You should see something like the following:
 
-![Tails Admin Assistant](./keygen-walkthru-images/du_gnupg_dir_verify-1.png)
+![Tails Admin Assistant](./keygen-walkthru-images/du_gnupg_dir_verify-1.jpg)
 
 This directory should be on a device called `TailsData_unlocked`.
 
@@ -152,14 +152,14 @@ This directory should be on a device called `TailsData_unlocked`.
 
 You should see something like the following:
 
-![Tails Admin Assistant](./keygen-walkthru-images/du_gnupg_dir_verify-2.png)
+![Tails Admin Assistant](./keygen-walkthru-images/du_gnupg_dir_verify-2.jpg)
 
 This directory should be on a device called `TailsData_unlocked`.
 
 `cd`  
 `df .`  
 
-![Tails Admin Assistant](./keygen-walkthru-images/du_gnupg_dir_verify-3.png)
+![Tails Admin Assistant](./keygen-walkthru-images/du_gnupg_dir_verify-3.jpg)
 
 The last directory (the "home directory") is on something called `aufs` which
 is "Mounted on" `/`.
