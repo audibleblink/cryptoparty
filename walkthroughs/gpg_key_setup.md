@@ -262,19 +262,23 @@ Again, if someone gets your Tails USB key and knows your Persistent password
 
 ## Create Subkeys for Daily use
 
+Now, we just said we want to keep our "prime keypair" safe. They should be kept
+safe in a safe-deposit box or wall-safe. How can we get the benefits of GPG
+without a ton of hassle? We want to create sub-keys that we can put on our
+laptop.
+
 This is a rather convoluted process but it comes out like this.
 
-1. You have a private key in a keyring
-2. Generate a new sub-key on that keyring
+1. You have a public / private keypair ("prime keypair") in a keyring
+2. Generate a new sub-key on that keyring (public/private) for encryption
 3. Move this keyring to a safe place
-4. Copy the keyring, sans the master private key to a daily use place
+4. Copy the keyring and remove the "prime" private key
+5. Keyring with public subkey, private subkey, public "prime" key, and a ghost private "prime" key
 
-We follow the path defined in the [Debian Subkeys Guide](https://wiki.debian.org/Subkeys).
-
-1. Start in the terminal
+1. Start in the Terminal again. Right click on the desktop to re-open one, if needed.
 1. `cd`
 1. `umask 077; tar -cf $HOME/Persistent/gnupg-backup.tar -C $HOME .gnupg`
-1.  Congratulations, on your Persistent drive you have a backup of the keys `gpg` created in case something bad happens
+1.  Congratulations, on your Persistent drive you have a backup of the keys `gpg` created in case something bad happens. Again, this is all the more reason to make sure that this USB key does not become compromised
 1.  `gpg --edit-key 7EC9E024`: Remember, this is "Tutorial's" identifier. This will open the `gpg` dialog
 1.  `addkey`
 1.  Provide your secret key
@@ -284,55 +288,95 @@ We follow the path defined in the [Debian Subkeys Guide](https://wiki.debian.org
 1.  **y** for really create
 1.  `list`
 
-_Pic here_
+(_For these steps we followed the path defined in the [Debian Subkeys
+Guide](https://wiki.debian.org/Subkeys)). Also this post by [Ana Beatriz
+Guererro López](https://ekaia.org/blog/2009/05/10/creating-new-gpgkey/))
 
-As you can see, the new key `963ABC84` now exists and it has `usage: S` (subkey) and it has "ultimate" trust to the original key of "Tutorial." That is, `963ABC84` knows its spawned from `7EC9E024`, the master private key. `963ABC84` will go into the world as a "representative of" the master private key but is only just that: a representative, a symbol of the authority of a thing somewhere else – rather like a diplomat. 
+As you can see, the new key `963ABC84` now exists and it has `usage: S`
+(subkey) and it has "ultimate" trust to the original key of "Tutorial." That
+is, `963ABC84` knows its spawned from `7EC9E024`, the master private key.
+`963ABC84` will go into the world as a "representative of" the master private
+key but is only just that: a representative, a symbol of the authority of a
+thing somewhere else – rather like a diplomat.
 
-However, we've only created a _signing_ subkey. If we want to encrypt, we also want to create an encryption subkey. Follow the same steps as above but specify "RSA (encrypt only)."
+`7EC9E024` should also inform the world that it endorses `963ABC84` as its
+representative. Enter `save` to exit the `--edit-key` menu. Endorse the new key
+with: `gpg --default-key 7EC9E024 --sign-key 963ABC84`. Do the same with any
+other subkeys you created.
 
-At the `gpg>` prompt type `list` and you should see 4 keys:
+However, we've only created a _signing_ subkey. If we want to encrypt, we also
+want to create an encryption subkey. Follow the same steps as above but specify
+"(6) RSA (encrypt only)." Similarly the parent key (`7EC9E024`) should be used to
+sign any newly created keys.
 
-* Your _master_ private key
-* Your public encryption key
-* Your first sub-key (for signing)
-* Your first sub-key (for encrypting)
-
-With this we finish step 2.
-
-In step 3 we need to store this full keyring somewhere. This is simple:
+## Step: Switch!
 
 `cp -r ~/.gnupg ~/Persistent/gnupg-master-Tutorial-7EC9E024`
 
-I recommend this long informative name for easy recall. Hopefully you won't see this information often! That was it!
+I recommend this long informative name for easy recall. You won't type this
+information often, so name it informatively. At this point, `~/.gnupg` and 
+`~/Persistent/gnupg-master-Tutorial-7EC9E024` have the full keyring
+information.
 
-In our final step we need to remove the master key from the keyring.
+Our next steps are going to do **DESTRUCTIVE** changes on what's in `~/.gnupg`,
+but won't touch the other directory.
 
-Take a look at the key database with `gpg --list-keys`
+## Step: Remove the "Prime" Key-pair
 
-The top key is our _master_ key and it needs to get out for the daily-use keyring.
+Take a look at the key database with `gpg --list-secret-keys`
 
-* `gpg --output ~/Persistent/secret-subkeys --export-secret-subkeys 7EC9E024`
-* `gpg --delete-secret-keys 7EC9E024` with **y** to confirm and **y** again. I know, it's scary!
-* `gpg --import ~/Persistent/secret-subkeys`
-* `rm ~/Persistent/secret-subkeys`
+The top key is our _master_ (or _prime_) key and it needs to get out for the
+daily-use keyring. We're going to *export* the stuff we need to save, remove
+the stuff that needs to go away, and then re-import the stuff we set aside.
 
-Now list your secret keys with `gpg -K`. You will see that first key `7EC9E024` now says `sec#` which means this keyring no longer has the secret key on it. By way of comparison try `gpg --homedir ~/Persistent/gnupg-master-Tutorial-7EC9E024 -K` and you'll see that the "master" directory still has the full details! The first line is `sec` versus `sec#`.
+`gpg --output /var/tmp/secret-subkeys --export-secret-subkeys 7EC9E024`
 
-Lastly, the password on this "de-mastered" keyring is still the same as your original strong password. Apply your third (and final) password to this key with: `gpg --edit-key 7EC9E024 passwd`
+This step says "hey, all those secret subkeys that were hanging off of
+`7EC9E024`, export them to a file called `/var/tmp/secret-subkeys`. Since we're
+using Tails, we can write these secure data to a file in `/var/tmp` because
+Tails scrubs that directory when we end our Tails session.
 
-At this point, on your Tails installation you have your master credentials. We now need to get your daily-use credentials on your second USB stick. Insert this USB stick into the computer. For Unix people: "We need to mount the new USB disk and copy the subkey information onto the drive."
+`gpg --delete-secret-keys 7EC9E024` with **y** to confirm and **y** again. I know, it's scary!
+
+This removes our top-level, _prime_, _master_ private key. This account can no
+longer decrypt content encrypted with the _master_, _prime_ public key.
+
+`gpg --import ~/var/tmp/secret-subkeys`
+
+This will re-import the sub-keys but with the private _master_ key as a
+"ghost". If you perform `gpg --list-secret-keys`, you'll see the private key is
+listed with an `#`. This denotes that `gpg` knows these subkeys have a parent,
+but it's not in the keyring.
+
+`rm ~/Persistent/secret-subkeys`
+
+This deletes the temporary file. A thorough disk scrubbing will be done by
+Tails.
+
+Lastly, the password on this "de-mastered" keyring is still the same as your
+original strong password. Apply your third (and final) password to this key
+with: `gpg --edit-key 7EC9E024 passwd`
+
+## Step: Move Daily-use Credentials
+
+At this point, on your Tails installation you have your master credentials. We
+now need to get your daily-use credentials on your second USB stick so that you
+can carry those credentials to you day to day OS or computer.
+
+Insert this USB stick into the computer. For Unix people: "We need to mount the
+new USB disk and copy the subkey information onto the drive."
 
 1. Run `lsblk` this means :List Block Devices, aka Disks
 2. On my system `sda` has a tree that has a bunch of Tails partitions. `sda` means device `a`. Its partitions are `sda1`, `sda2`, etc.
 3. `sdb` looks similar, but seems to be the right size of the USB stick I injected. I'm going to use the first partition of this device thus `/dev/` + device `sdb` + partition `1` thus my "device name" is `/dev/sdb1`.
-4. I need a "mount point" a directory on the disk that will tunnel data back to /dev/sdb1.
+4. I need a "mount point" a directory on the disk that will tunnel data back to `/dev/sdb1`.
 5. I enter the command: `sudo mount /dev/sdb1 /mnt -o umask=000`
 6. This means any user can write to this "directory."
-7. Copy the subkey goodies over: cp -r ~/.gnupg /mnt/gnupg`
+7. Copy the hobbled keyring over: `cp -r ~/.gnupg /mnt/gnupg`
 8. `cd /mnt/gnupg`
 9. `gpg --homedir . -K`: The output should show the subkey with master key removed (`sec#`).
-9. `gpg --export -a  7EC9E024 > public.key`: write out a copy of your public key, other tools that sign as you will need this
-9. `gpg --export-secret-key -a  7EC9E024 > private.key`: write out your public key, you'll want to share this with the world so people can contact you securely!
+9. `gpg --export -a  ENCRYPTION_SUBKEY_ID > public.key`: write out a copy of your public key, other tools that sign as you will need this
+9. `gpg --export-secret-key -a  ENCRYPTION_SUBKEY_ID > private.key`: write out your public key, you'll want to share this with the world so people can contact you securely!
 10. `cd && sudo umount /mnt`
 
 ## Cleanup
