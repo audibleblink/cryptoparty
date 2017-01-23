@@ -59,8 +59,9 @@ your laptop has been compromised.
 * The library computer where you generate your keys has been compromised, etc.
 
 If you're familiar with [the metaphor][wand metaphor]: what if someone had
-bugged the wizard's workshop when he was making your wand: saw the ingredients,
-hears the magical password? They could clone _your_ wand and act as you!
+bugged the wizard's workshop when he was making your wand. They saw the
+ingredients, heard the magical password? They could clone _your_ wand and act
+as you!
 
 To make sure `gpg` gets to operate in a safe house (or safe operating system)
 we create our keys in Tails - it's like a brand new operating system each time
