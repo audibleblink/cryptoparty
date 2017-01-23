@@ -55,7 +55,7 @@ Why do we need Tails to generate encryption keys?  In short, you don't know if
 your laptop has been compromised.
 
 * Your employer might have installed a keyboard logger (which would capture the password you used to initialize your key).
-* You might have fallen prey to an email-based malware months ago that has remained resident on your computer for many months now.
+* You might have fallen prey to an email-based malware months ago that has remained resident on your computer for many months now (an "advanced persistent threat")
 * The library computer where you generate your keys has been compromised, etc.
 
 If you're familiar with [the metaphor][wand metaphor]: what if someone had
