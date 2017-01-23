@@ -205,14 +205,20 @@ laptop and you're back in business.
 
 ### Create the Public / Private Pair
 
-_As a supplement, see [The GnuPG Manual](https://www.gnupg.org/gph/en/manual/c14.html)_
+_As a supplementary reference, see [The GnuPG Manual](https://www.gnupg.org/gph/en/manual/c14.html)_
 
 In the terminal type:
 
 1. `gpg --gen-key`
 2. Accept the default (1) RSA and RSA
 3. For keysize choose 4096. This will make your `master` key the most complex and hard to steal possible
-4. Set an expiration of `1y` (one year). Keys should have a built-in death date. If your master key is stolen or lost this is the only way to tell the public that people signing as you should stop being trusted. It's much like the expiration date an a credit card. Expiration dates, also like credit cards, can be renewed (covered elsewhere)
+4. Set an expiration of "Never." The expiration date behaves the same as it
+does on credit cards and for the same purpose. Since this key will be protected as well as
+   possible and won't be taken into the world day-to-day, let's set this key to
+   be non-expiring. Similarly if you only left your credit card in a bank safe,
+   you could be rather comfortable with it having a distant expiry date. There
+   are arguments to why this shouldn't be done. A happy medium might be `5y` or
+   `10y` corresponding to five and ten years, respectively.
 5. Accept these changes
 6. Provide your real real name (here "Tutorial")
 7. Provide a valid email address (here `tutorial@example.com`)
