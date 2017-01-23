@@ -12,6 +12,14 @@ Some of the steps are onerous, but they're designed for your protection and
 we'll have some reasoning behind each one. Take your time and welcome to the
 club!
 
+## Pre-Work
+
+If you're new to public-key cryptography, read the [Wand Metaphor for Cryptography][wand metaphor].
+
+We've tried to take some of the more difficult components of public-key
+cryptography and have translated it to the universe of magical wands (&agrave;
+la "Harry Potter"). We hope this provides a conceptual framework.
+
 ## Ingredients
 
 * 1-3 USB Sticks with 4GB or more of space
