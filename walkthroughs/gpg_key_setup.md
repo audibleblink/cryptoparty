@@ -292,6 +292,8 @@ This is a rather convoluted process but it comes out like this.
 Guide](https://wiki.debian.org/Subkeys)). Also this post by [Ana Beatriz
 Guererro López](https://ekaia.org/blog/2009/05/10/creating-new-gpgkey/))
 
+<!-- https://www.paulfurley.com/gpg-for-humans-protecting-your-primary-key/ -->
+
 As you can see, the new key `963ABC84` now exists and it has `usage: S`
 (subkey) and it has "ultimate" trust to the original key of "Tutorial." That
 is, `963ABC84` knows its spawned from `7EC9E024`, the master private key.
