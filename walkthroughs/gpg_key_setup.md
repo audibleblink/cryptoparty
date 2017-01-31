@@ -564,6 +564,17 @@ Congratulations. You now have:
 You can now share your daily-use subkey public key so that people can send you
 messages to be decrypted with your private key.
 
+## Further Directions
+
+There are further realms to explore with your keys. You can use your public and
+private keypair as a signature to say "I sign off on this message, and if
+anyone changes this message's content, you'll know it!" You can also validate
+that people you know have the keys which bear their names so as to create a web
+of trust. You can even take your daily-use subkeys and put them on a piece of
+hardware like a [Yubikey Nano][nano] so that the subkey credentials can be inserted and
+removed when you see fit! Depending on your security need, there are many paths
+to pursue!
+
 [Gpg4Win]: https://www.gpg4win.org/
 [TPV]: https://tails.boum.org/doc/first_steps/persistence/configure/index.en.html
 [TPVu]: https://tails.boum.org/doc/first_steps/persistence/use/index.en.html
@@ -573,3 +584,4 @@ messages to be decrypted with your private key.
 [restart Tails]: https://tails.boum.org/doc/first_steps/shutdown/index.en.html.
 [strong]: http://www.howtogeek.com/195430/how-to-create-a-strong-password-and-remember-it/
 [wand metaphor]: ./public_key_crypto_metaphor.md
+[nano]: https://www.yubico.com/products/yubikey-hardware/yubikey4/
