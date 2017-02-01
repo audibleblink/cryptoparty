@@ -1,12 +1,12 @@
 ## Purpose
 
 It is the intent of this repository to inform and instruct users wanting to protect themselves from prying
-eyes when communicating day to day. Each walkthrough is framed in a way that tells you upfornt what data of
+eyes when communicating day to day. Each walkthrough is framed in a way that tells you upfront what data of
 yours is at risk, how it's collected, and how it can be exploited.
 
-Those looking to contriibute:
+Those looking to contribute:
 
-  * Present the content in small digestable portions
+  * Present the content in small digestible portions
   * Walkthroughs should have the following sections:
     1. The action (email, sms, sending a file, sharing a password)
     2. How's the information vulnerable? How is it exploited?
@@ -36,9 +36,8 @@ Those looking to contriibute:
   - Onion Share
   - GPG w/password
 
-## Delivery methods
-  - Small / Digestable / Encouraging
-  - Things you want to do -&lt; How it's vulnerable -&lt; How to protect yourself
+## Diving Deeper
+* [Setting Up a GPG Key](./walkthroughs/gpg_key_setup.md)
 
 ## Upcoming Walkthroughs
 
@@ -46,4 +45,4 @@ Those looking to contriibute:
    * Using someone else's key to encrypt a message
    * Unencrypting a message someone sent you
    * Configuring Thunderbird
-   * Protecting against MITM
+   * Protecting against MITM (man in the middle) attacks
